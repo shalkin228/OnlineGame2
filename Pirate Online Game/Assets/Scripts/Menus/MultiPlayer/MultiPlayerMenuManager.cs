@@ -22,6 +22,7 @@ public class MultiPlayerMenuManager : MonoBehaviourPunCallbacks
     public override void OnJoinedLobby()
     {
         onJoinedLobby.Invoke();
+        PhotonNetwork.AutomaticallySyncScene = true;
     }
 
     public void ClickCreateRoom()

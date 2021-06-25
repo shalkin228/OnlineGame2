@@ -17,9 +17,9 @@ public class GUI : MonoBehaviourPunCallbacks
             if (PhotonNetwork.IsMasterClient)
             {
                 startButton.SetActive(true);
-                if (PhotonNetwork.CurrentRoom.PlayerCount < 2)
+                if (PhotonNetwork.CurrentRoom.PlayerCount >= 2)
                 {
-                    startButton.GetComponent<Button>().interactable = false;
+                    startButton.GetComponent<Button>().interactable = true;
                 }
             }
         }
@@ -31,7 +31,7 @@ public class GUI : MonoBehaviourPunCallbacks
 
     public void OnClickStartButton()
     {
-        
+        PhotonNetwork.LoadLevel("MultiPlayerMap" + (int)PhotonNetwork.CurrentRoom.CustomProperties["Map"]);
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
