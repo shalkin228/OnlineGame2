@@ -3,6 +3,7 @@ using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GUI : MonoBehaviourPunCallbacks
@@ -16,11 +17,7 @@ public class GUI : MonoBehaviourPunCallbacks
         {
             if (PhotonNetwork.IsMasterClient)
             {
-                startButton.SetActive(true);
-                if (PhotonNetwork.CurrentRoom.PlayerCount >= 2)
-                {
-                    startButton.GetComponent<Button>().interactable = true;
-                }
+                UpdateStartButton();
             }
         }
         else if (type == GUIType.Playing)
@@ -36,12 +33,31 @@ public class GUI : MonoBehaviourPunCallbacks
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        if (PhotonNetwork.IsMasterClient)
+        if (PhotonNetwork.IsMasterClient && SceneManager.GetActiveScene().name == "MultiPlayerWaiting")
         {
             if (startButton.GetComponent<Button>().interactable == false)
             {
                 startButton.GetComponent<Button>().interactable = true;
             }
+        }
+    }
+
+    public override void OnMasterClientSwitched(Player newMasterClient)
+    {
+        base.OnMasterClientSwitched(newMasterClient);
+
+        if(newMasterClient == PhotonNetwork.LocalPlayer)
+        {
+            UpdateStartButton();
+        }
+    }
+
+    private void UpdateStartButton()
+    {
+        startButton.SetActive(true);
+        if (PhotonNetwork.CurrentRoom.PlayerCount >= 2)
+        {
+            startButton.GetComponent<Button>().interactable = true;
         }
     }
 }

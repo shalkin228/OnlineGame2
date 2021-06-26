@@ -32,6 +32,7 @@ public class MultiPlayerMenuManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
+        PhotonNetwork.NickName = PhotonNetwork.CurrentRoom.PlayerCount.ToString();
         if (!PhotonNetwork.IsMasterClient)
         {
             Debug.Log("is'nt master");
