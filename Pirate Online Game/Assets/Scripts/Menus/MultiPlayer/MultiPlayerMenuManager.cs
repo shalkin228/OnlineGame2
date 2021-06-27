@@ -12,6 +12,7 @@ public class MultiPlayerMenuManager : MonoBehaviourPunCallbacks
 
     void Start()
     {
+        Application.targetFrameRate = 90;
         PhotonNetwork.ConnectUsingSettings();
     }
 
