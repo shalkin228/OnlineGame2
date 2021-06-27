@@ -1,4 +1,5 @@
 using Photon.Pun;
+using System;
 using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ public class PlayerRoomName : MonoBehaviourPunCallbacks
     {
         if (GetComponent<PhotonView>().IsMine)
         {
+            Debug.Log(PhotonNetwork.NickName);
             nickNameText.text = "Player " + PhotonNetwork.NickName;
         }
         else
@@ -31,15 +33,16 @@ public class PlayerRoomName : MonoBehaviourPunCallbacks
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
         base.OnPlayerLeftRoom(otherPlayer);
+        int tempNickOther = Convert.ToInt32(otherPlayer.NickName);
+        int tempNick = Convert.ToInt32(PhotonNetwork.NickName);
 
-        if ((byte)otherPlayer.CustomProperties["nick"] < (byte)PhotonNetwork.LocalPlayer.CustomProperties["nick"])
+        if(tempNickOther < tempNick && GetComponent<PhotonView>().IsMine)
         {
-            Hashtable hash = PhotonNetwork.LocalPlayer.CustomProperties;
-            byte tempNick = (byte)hash["nick"];
-            hash.Remove("nick");
-            hash.Add("nick", tempNick--);
+            tempNick--;
 
-            PhotonNetwork.NickName = tempNick--.ToString();
+            PhotonNetwork.NickName = tempNick.ToString();
+            Debug.Log(PhotonNetwork.NickName);
+
             UpdateNickname();
         }
     }

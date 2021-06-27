@@ -1,5 +1,6 @@
 using Cinemachine;
 using Photon.Pun;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,9 +17,6 @@ public class SpawnPlayers : MonoBehaviour
         if(setNick)
         {
             PhotonNetwork.NickName = PhotonNetwork.CurrentRoom.PlayerCount.ToString();
-            Hashtable hash = new Hashtable();
-            hash.Add("nick", PhotonNetwork.CurrentRoom.PlayerCount);
-            bool b = PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
         }
 
         var tempPlayer = PhotonNetwork.Instantiate(playerPrefab.name, spawnPos.position, Quaternion.identity);
