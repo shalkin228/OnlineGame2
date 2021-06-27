@@ -623,8 +623,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1384.28, y: -742.42}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -1383.17, y: -742.99}
+  m_SizeDelta: {x: 199.8065, y: 49.9516}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1006274426052829202
 CanvasRenderer:
@@ -654,7 +654,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Player
+  m_text: 'Player '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 525560a391bed7540a568c859b9e1d11, type: 2}
   m_sharedMaterial: {fileID: -361269087043216173, guid: 525560a391bed7540a568c859b9e1d11, type: 2}
@@ -717,7 +717,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 191.17288, w: 44.7865}
+  m_margin: {x: 0, y: 0, z: 194.14099, w: 46.03811}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
