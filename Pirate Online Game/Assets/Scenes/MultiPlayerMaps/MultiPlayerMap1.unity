@@ -2269,6 +2269,14 @@ PrefabInstance:
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 309342228}
+    - target: {fileID: 3996963544197544377, guid: 361ed8f173b5e37429d2f2b33e0157cd, type: 3}
+      propertyPath: m_Lens.m_SensorSize.x
+      value: 2.088889
+      objectReference: {fileID: 0}
+    - target: {fileID: 3996963544197544377, guid: 361ed8f173b5e37429d2f2b33e0157cd, type: 3}
+      propertyPath: m_Lens.OrthographicSize
+      value: 15.96
+      objectReference: {fileID: 0}
     - target: {fileID: 3996963544197544378, guid: 361ed8f173b5e37429d2f2b33e0157cd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2280,6 +2288,22 @@ PrefabInstance:
     - target: {fileID: 3996963544197544378, guid: 361ed8f173b5e37429d2f2b33e0157cd, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3996963544296174832, guid: 361ed8f173b5e37429d2f2b33e0157cd, type: 3}
+      propertyPath: orthographic size
+      value: 15.96
+      objectReference: {fileID: 0}
+    - target: {fileID: 3996963544296174832, guid: 361ed8f173b5e37429d2f2b33e0157cd, type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3996963544296174832, guid: 361ed8f173b5e37429d2f2b33e0157cd, type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0.5764706
+      objectReference: {fileID: 0}
+    - target: {fileID: 3996963544296174832, guid: 361ed8f173b5e37429d2f2b33e0157cd, type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0.34117648
       objectReference: {fileID: 0}
     - target: {fileID: 3996963544296174834, guid: 361ed8f173b5e37429d2f2b33e0157cd, type: 3}
       propertyPath: m_Name
