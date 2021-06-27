@@ -11,6 +11,7 @@ public class MultiPlayerMenuManager : MonoBehaviourPunCallbacks
     [SerializeField] private UnityEvent onClickCreateRoom;
     void Start()
     {
+        Screen.SetResolution(1280, 720, true);
         PhotonNetwork.ConnectUsingSettings();
     }
 
