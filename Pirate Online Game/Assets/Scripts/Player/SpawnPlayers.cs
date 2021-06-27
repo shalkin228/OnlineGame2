@@ -3,6 +3,7 @@ using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class SpawnPlayers : MonoBehaviour
 {
@@ -13,7 +14,13 @@ public class SpawnPlayers : MonoBehaviour
     void Start()
     {
         if(setNick)
+        {
             PhotonNetwork.NickName = PhotonNetwork.CurrentRoom.PlayerCount.ToString();
+            Hashtable hash = new Hashtable();
+            hash.Add("nick", PhotonNetwork.CurrentRoom.PlayerCount);
+            bool b = PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
+        }
+
         var tempPlayer = PhotonNetwork.Instantiate(playerPrefab.name, spawnPos.position, Quaternion.identity);
         tempPlayer.tag = "Player";
         tempPlayer.layer = 7;

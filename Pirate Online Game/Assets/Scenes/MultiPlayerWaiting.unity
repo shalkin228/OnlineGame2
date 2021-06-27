@@ -307,7 +307,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &716402677
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -692,7 +692,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.088889, y: 1}
+    m_SensorSize: {x: 2.0555556, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -790,6 +790,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 2070472343}
+    - target: {fileID: 4517714853142001710, guid: a6c6ad79e946aba43947052f610adb16, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 4517714853142001711, guid: a6c6ad79e946aba43947052f610adb16, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -874,6 +878,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5366318765763633761, guid: a6c6ad79e946aba43947052f610adb16, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6350041153956393116, guid: a6c6ad79e946aba43947052f610adb16, type: 3}
       propertyPath: type
       value: 0
@@ -882,6 +890,10 @@ PrefabInstance:
       propertyPath: startButton
       value: 
       objectReference: {fileID: 716402676}
+    - target: {fileID: 8523620507913065511, guid: a6c6ad79e946aba43947052f610adb16, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6c6ad79e946aba43947052f610adb16, type: 3}
 --- !u!114 &8813389106802295707 stripped
