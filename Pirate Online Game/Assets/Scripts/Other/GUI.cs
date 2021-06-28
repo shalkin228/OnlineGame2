@@ -42,25 +42,15 @@ public class GUI : MonoBehaviourPunCallbacks
         }
     }
 
-    public override void OnPlayerLeftRoom(Player otherPlayer)
+    public override void OnMasterClientSwitched(Player newMasterClient)
     {
-        base.OnPlayerLeftRoom(otherPlayer);
+        base.OnMasterClientSwitched(newMasterClient);
         if (PhotonNetwork.IsMasterClient && SceneManager.GetActiveScene().name == "MultiPlayerWaiting")
         {
             if (startButton.GetComponent<Button>().interactable == true && PhotonNetwork.CurrentRoom.PlayerCount == 1)
             {
                 startButton.GetComponent<Button>().interactable = false;
             }
-        }
-    }
-
-    public override void OnMasterClientSwitched(Player newMasterClient)
-    {
-        base.OnMasterClientSwitched(newMasterClient);
-
-        if(newMasterClient == PhotonNetwork.LocalPlayer)
-        {
-            UpdateStartButton();
         }
     }
 

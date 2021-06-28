@@ -355,6 +355,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 18
+  playerSprites: {fileID: 2690443484406325578}
 --- !u!114 &5592509209899166413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -369,6 +370,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canDig: 0
   type: 0
+  holeSpawnPoint: {fileID: 7444230398672566043}
   digHole: {fileID: 0}
 --- !u!50 &2690443484673800866
 Rigidbody2D:
@@ -476,6 +478,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
+  - {fileID: 2690443484673800867}
   - {fileID: 541004366771860717}
   - {fileID: 8129641040363863842}
   - {fileID: 777350878236089273}

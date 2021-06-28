@@ -6,7 +6,9 @@ using UnityEngine;
 public class Digging : MonoBehaviour
 {
     public bool canDig;
-    [SerializeField] private GUIType type; 
+
+    [SerializeField] private GUIType type;
+    [SerializeField] private Transform holeSpawnPoint;
 
     public GameObject digHole;
 
@@ -14,14 +16,14 @@ public class Digging : MonoBehaviour
     {
         if (canDig && type == GUIType.Playing)
         {
-            GetComponent<PhotonView>().RPC("InstantiateDigHole", RpcTarget.All);
+            GetComponent<PhotonView>().RPC("InstantiateDigHole", RpcTarget.All, digHole);
             return;
         }
     }
 
     [PunRPC]
-    public void InstantiateDigHole()
+    public void InstantiateDigHole(GameObject hole)
     {
-        Instantiate(digHole, transform.position, Quaternion.identity);
+        Instantiate(hole, holeSpawnPoint.position, Quaternion.identity);
     }
 }
