@@ -339,6 +339,7 @@ Transform:
   - {fileID: 7444230398672566043}
   - {fileID: 7454368450531375898}
   - {fileID: 2690443484406325578}
+  - {fileID: 4494955374948589737}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -371,7 +372,7 @@ MonoBehaviour:
   canDig: 0
   type: 0
   holeSpawnPoint: {fileID: 7444230398672566043}
-  digHole: {fileID: 0}
+  digHole: {fileID: 4592650610016949390, guid: c3104fdc9962e7a4bb0e1704d2457668, type: 3}
 --- !u!50 &2690443484673800866
 Rigidbody2D:
   serializedVersion: 4
@@ -772,4 +773,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2690443484673800868}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8435671122201659773
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4494955374948589737}
+  m_Layer: 6
+  m_Name: PlayerThings
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4494955374948589737
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8435671122201659773}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2690443484673800868}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
