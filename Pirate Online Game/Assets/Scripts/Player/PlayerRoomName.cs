@@ -21,7 +21,6 @@ public class PlayerRoomName : MonoBehaviourPunCallbacks
     {
         if (GetComponent<PhotonView>().IsMine)
         {
-            Debug.Log(PhotonNetwork.NickName);
             nickNameText.text = "Player " + PhotonNetwork.NickName;
         }
         else

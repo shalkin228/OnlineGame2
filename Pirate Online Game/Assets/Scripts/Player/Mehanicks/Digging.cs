@@ -7,6 +7,8 @@ public class Digging : MonoBehaviour
 {
     public bool canDig;
 
+    public static Digging instance;
+
     [SerializeField] private GUIType type;
     [SerializeField] private Transform holeSpawnPoint;
 

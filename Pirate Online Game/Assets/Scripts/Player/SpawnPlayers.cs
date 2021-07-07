@@ -22,6 +22,11 @@ public class SpawnPlayers : MonoBehaviour
         var tempPlayer = PhotonNetwork.Instantiate(playerPrefab.name, spawnPos.position, Quaternion.identity);
         tempPlayer.tag = "Player";
         tempPlayer.layer = 7;
+        Digging.instance = tempPlayer.GetComponent<Digging>();
+        if(tempPlayer.GetComponent<Digging>() == null)
+        {
+            Debug.Log("s");
+        }
 
         GetComponentInChildren<CinemachineVirtualCamera>().Follow = tempPlayer.transform;
 
