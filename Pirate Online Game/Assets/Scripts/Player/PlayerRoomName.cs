@@ -40,7 +40,6 @@ public class PlayerRoomName : MonoBehaviourPunCallbacks
             tempNick--;
 
             PhotonNetwork.NickName = tempNick.ToString();
-            Debug.Log(PhotonNetwork.NickName);
 
             UpdateNickname();
         }
