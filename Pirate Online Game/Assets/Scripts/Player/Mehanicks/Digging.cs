@@ -12,7 +12,7 @@ public class Digging : MonoBehaviour
     [SerializeField] private GUIType type;
     [SerializeField] private Transform holeSpawnPoint;
 
-    public GameObject digHole;
+    public GameObject digHole; 
 
     public void Dig()
     {
