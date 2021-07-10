@@ -9,18 +9,22 @@ public class EnemyBase : MonoBehaviour
     [HideInInspector] public int currentHp = 0;
 
     [SerializeField] private int maxHp;
+    [SerializeField] private float maxTargetingPosition;
+    [SerializeField] private Transform hitPos;
+    [SerializeField] private float hitRadius;
 
     private NavMeshAgent agent;
-    private PhotonView photonView;
     private Animator anim;
+    private PhotonView pv;
+    private bool isHitting = false;
 
-    void Start()
+    private void Start()
     {
         currentHp = maxHp;
 
-        photonView = GetComponent<PhotonView>();
-
         anim = GetComponent<Animator>();
+
+        pv = GetComponent<PhotonView>();
 
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
@@ -31,6 +35,9 @@ public class EnemyBase : MonoBehaviour
     {
         if (PhotonNetwork.IsMasterClient)
         {
+            if (isHitting)
+                return;
+
             List<Transform> players = new List<Transform>();
 
             if (FindObjectsOfType<PlayerMovement>() == null)
@@ -54,10 +61,14 @@ public class EnemyBase : MonoBehaviour
                 currentIterationIndex++;
             }
 
-            if (Vector3.Distance(players[minDistancePlayerIndex].position, transform.position) > 50)
+            if (Vector3.Distance(players[minDistancePlayerIndex].position, transform.position) > maxTargetingPosition)
             {
                 agent.isStopped = true;
 
+            }
+            else
+            {
+                agent.isStopped = false;
             }
 
 
@@ -81,6 +92,11 @@ public class EnemyBase : MonoBehaviour
             {
                 anim.SetBool("IsRunning", false);            
             }
+
+            if (Vector3.Distance(transform.position, players[minDistancePlayerIndex].position) <= 2)
+            {
+                TryAttackPlayer(players[minDistancePlayerIndex].position);
+            }
         }
 
     }
@@ -89,7 +105,7 @@ public class EnemyBase : MonoBehaviour
     {
         if(dir == Direction.Left)
         {
-            foreach(Transform child in transform.GetChild(0))
+            foreach (Transform child in transform.GetChild(0))
             {
                 child.GetComponent<SpriteRenderer>().flipX = true;
             }
@@ -103,5 +119,25 @@ public class EnemyBase : MonoBehaviour
         }
     }
 
+      private void TryAttackPlayer(Vector3 playerPos)
+      {
+        Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(hitPos.position, hitRadius);
+
+        foreach(Collider2D player in hitPlayer)
+        {
+            if (player.tag == "Other Player" || player.tag == "Player")
+            {
+                pv.RPC("NetworkAttackPlayer", RpcTarget.All);
+            }
+        }
+      }
+
+    [PunRPC]
+    public void NetworkAttackPlayer()
+    {
+        anim.SetTrigger("Hit");
+        agent.isStopped = true;
+        isHitting = true;
+    }
 }
 public enum Direction { Right, Left }
