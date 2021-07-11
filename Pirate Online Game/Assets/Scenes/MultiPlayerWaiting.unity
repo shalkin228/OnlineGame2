@@ -837,9 +837,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f08aebac858e254ab3ad7c231675bf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHp: 0
-  maxHp: 0
-  maxTargetingPosition: 0
+  currentHealth: 0
+  maxHealth: 0
+  maxTargetingPosition: 50
   hitPos: {fileID: 595108339}
   hitRadius: 0
 --- !u!61 &631154293

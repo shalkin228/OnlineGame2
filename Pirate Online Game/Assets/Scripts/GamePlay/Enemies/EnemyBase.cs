@@ -4,23 +4,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyBase : MonoBehaviour
+public class EnemyBase : BaseHealth
 {
-    [HideInInspector] public int currentHp = 0;
-
-    [SerializeField] private int maxHp;
     [SerializeField] private float maxTargetingPosition;
     [SerializeField] private Transform hitPos;
     [SerializeField] private float hitRadius;
+    [SerializeField] private float hitCoolDown;
 
     private NavMeshAgent agent;
     private Animator anim;
     private PhotonView pv;
     private bool isHitting = false;
 
-    private void Start()
+    public override void Start()
     {
-        currentHp = maxHp;
+        base.Start();
 
         anim = GetComponent<Animator>();
 
@@ -95,7 +93,7 @@ public class EnemyBase : MonoBehaviour
 
             if (Vector3.Distance(transform.position, players[minDistancePlayerIndex].position) <= 2)
             {
-                TryAttackPlayer(players[minDistancePlayerIndex].position);
+                TryAttackPlayer(players[minDistancePlayerIndex].gameObject);
             }
         }
 
@@ -119,7 +117,7 @@ public class EnemyBase : MonoBehaviour
         }
     }
 
-      private void TryAttackPlayer(Vector3 playerPos)
+      private void TryAttackPlayer(GameObject targetPlayer)
       {
         Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(hitPos.position, hitRadius);
 
@@ -127,17 +125,34 @@ public class EnemyBase : MonoBehaviour
         {
             if (player.tag == "Other Player" || player.tag == "Player")
             {
-                pv.RPC("NetworkAttackPlayer", RpcTarget.All);
+                pv.RPC("NetworkAttackPlayer", RpcTarget.All, targetPlayer.name);
+                return;
             }
         }
       }
 
     [PunRPC]
-    public void NetworkAttackPlayer()
+    public void NetworkAttackPlayer(string targetPlayerName)
     {
-        anim.SetTrigger("Hit");
+        anim.SetTrigger("Hit");       
         agent.isStopped = true;
         isHitting = true;
+    }
+
+    public void StopHitting()
+    {
+        isHitting = false;
+        agent.isStopped = false;
+    }
+
+    public void Hit()
+    {
+        Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(hitPos.position, hitRadius);
+
+        foreach (Collider2D player in hitPlayers)
+        {
+            player.GetComponent<IDamageable>().Damage(1);
+        }
     }
 }
 public enum Direction { Right, Left }
