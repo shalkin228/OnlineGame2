@@ -1,4 +1,5 @@
 using Photon.Pun;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -33,17 +34,25 @@ public class EnemyBase : BaseHealth
     {
         if (PhotonNetwork.IsMasterClient)
         {
+            
+
             if (isHitting)
                 return;
 
             List<Transform> players = new List<Transform>();
 
-            if (FindObjectsOfType<PlayerMovement>() == null)
-                return;
-
             foreach (var player in FindObjectsOfType<PlayerMovement>())
             {
                 players.Add(player.transform);
+            }
+
+            try
+            {
+                GameObject nothing = players[0].gameObject;
+            }
+            catch
+            {
+               return;
             }
 
             float minDistance = Vector3.Distance(players[0].position, transform.position);
@@ -70,7 +79,8 @@ public class EnemyBase : BaseHealth
             }
 
 
-            agent.SetDestination(players[minDistancePlayerIndex].position);
+            CentrializeAndSetDistination(players[minDistancePlayerIndex].position);
+
 
             Vector3 playerLocalPos = transform.InverseTransformPoint(players[minDistancePlayerIndex].position);
             if (playerLocalPos.x >= 0)
@@ -131,6 +141,18 @@ public class EnemyBase : BaseHealth
         }
       }
 
+    private void CentrializeAndSetDistination(Vector3 target)
+    {
+        if (Vector3.Distance(target, transform.position) < agent.stoppingDistance)
+        {
+            agent.SetDestination(transform.position);
+        }
+        else
+        {
+            agent.SetDestination(target);
+        }
+    }
+
     [PunRPC]
     public void NetworkAttackPlayer(string targetPlayerName)
     {
@@ -151,7 +173,8 @@ public class EnemyBase : BaseHealth
 
         foreach (Collider2D player in hitPlayers)
         {
-            player.GetComponent<IDamageable>().Damage(1);
+            if (player.tag == "Other Player" || player.tag == "Player")
+                player.GetComponent<IDamageable>().Damage(1);
         }
     }
 }
