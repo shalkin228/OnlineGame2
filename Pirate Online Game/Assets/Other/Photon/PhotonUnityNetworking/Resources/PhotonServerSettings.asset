@@ -37,6 +37,7 @@ MonoBehaviour:
   - DestroyRpc
   - InstantiateDigHole
   - NetworkAttackPlayer
+  - NetworkChangeDirection
   - SetNickName
   DisableAutoOpenWizard: 1
   ShowSettings: 0

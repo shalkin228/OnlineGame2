@@ -10,7 +10,7 @@ public class EnemyBase : BaseHealth
     [SerializeField] private float maxTargetingPosition;
     [SerializeField] private Transform hitPos;
     [SerializeField] private float hitRadius;
-    [SerializeField] private float hitCoolDown;
+    [SerializeField] private Transform hitPosRight, hitPosLeft;
 
     private NavMeshAgent agent;
     private Animator anim;
@@ -34,8 +34,6 @@ public class EnemyBase : BaseHealth
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            
-
             if (isHitting)
                 return;
 
@@ -85,11 +83,11 @@ public class EnemyBase : BaseHealth
             Vector3 playerLocalPos = transform.InverseTransformPoint(players[minDistancePlayerIndex].position);
             if (playerLocalPos.x >= 0)
             {
-                Flip(Direction.Right);
+                pv.RPC("NetworkChangeDirection", RpcTarget.AllBuffered, (byte)Direction.Right);
             }
             else
             {
-                Flip(Direction.Left);
+                pv.RPC("NetworkChangeDirection", RpcTarget.AllBuffered, (byte)Direction.Left);
             }
 
             if (agent.velocity != Vector3.zero)
@@ -109,25 +107,15 @@ public class EnemyBase : BaseHealth
 
     }
 
-    private void Flip(Direction dir)
+    private void OnDrawGizmosSelected()
     {
-        if(dir == Direction.Left)
-        {
-            foreach (Transform child in transform.GetChild(0))
-            {
-                child.GetComponent<SpriteRenderer>().flipX = true;
-            }
-        }
-        else
-        {
-            foreach (Transform child in transform.GetChild(0))
-            {
-                child.GetComponent<SpriteRenderer>().flipX = false;
-            }
-        }
+        if (hitPos == null)
+            return;
+
+        Gizmos.DrawWireSphere(hitPos.position, hitRadius);
     }
 
-      private void TryAttackPlayer(GameObject targetPlayer)
+    private void TryAttackPlayer(GameObject targetPlayer)
       {
         Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(hitPos.position, hitRadius);
 
@@ -159,6 +147,29 @@ public class EnemyBase : BaseHealth
         anim.SetTrigger("Hit");       
         agent.isStopped = true;
         isHitting = true;
+    }
+
+    [PunRPC]
+    public void NetworkChangeDirection(byte dir)
+    {
+        if(dir == (byte)Direction.Left)
+        {
+            foreach (Transform child in transform.GetChild(0))
+            {
+                child.GetComponent<SpriteRenderer>().flipX = true;
+            }
+
+            hitPos.position = hitPosLeft.position;
+        }
+        else
+        {
+            foreach (Transform child in transform.GetChild(0))
+            {
+                child.GetComponent<SpriteRenderer>().flipX = false;
+            }
+
+            hitPos.position = hitPosRight.position;
+        }
     }
 
     public void StopHitting()

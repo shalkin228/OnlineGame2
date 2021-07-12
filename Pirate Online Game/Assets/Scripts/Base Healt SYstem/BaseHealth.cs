@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class BaseHealth : MonoBehaviour, IDamageable
 {
@@ -37,7 +38,7 @@ public class BaseHealth : MonoBehaviour, IDamageable
 
     public virtual void Die() 
     {
-        Destroy(gameObject);
+        PhotonNetwork.Destroy(gameObject);
     }
 
 }
