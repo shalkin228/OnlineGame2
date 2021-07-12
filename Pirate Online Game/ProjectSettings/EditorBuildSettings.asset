@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MultiPlayerWaiting.unity
     guid: 19c22ab4f8be8f24fad72c3d77356aac
+  - enabled: 1
+    path: Assets/Scenes/News.unity
+    guid: 8a5fa4156ec51eb4789b6219081b8947
   m_configObjects: {}

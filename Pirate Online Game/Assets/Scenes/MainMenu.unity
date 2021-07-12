@@ -208,7 +208,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1434481951}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: JoinSinglePlayer
+        m_MethodName: News
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -13,4 +13,9 @@ public class MainMenu : MonoBehaviour
     {
         Application.LoadLevel(2);
     }
+
+    public void News()
+    {
+        Application.LoadLevel(7);
+    }
 }
