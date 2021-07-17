@@ -6,10 +6,8 @@ using Photon.Pun;
 [RequireComponent(typeof(PhotonView))]
 public class PlayerMovement : MonoBehaviourPun, IPunObservable
 {
-    public static PlayerMovement instance;
-
     [SerializeField] private float speed = 5;
-    [SerializeField] private Transform playerSprites;
+    [SerializeField] private Transform playerSprites, playerThings;
 
     private Vector2 joystickPos;
     private Rigidbody2D _rigidbody;
@@ -17,11 +15,6 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
     private PhotonView photonView;
     private Joystick joystick;
     private bool flipX;
-
-    private void Awake()
-    {
-        instance = this;
-    }
 
     private void Start()
     {
@@ -75,6 +68,10 @@ public class PlayerMovement : MonoBehaviourPun, IPunObservable
             sprite.GetComponent<SpriteRenderer>().flipX = flipX;
         }
 
+        foreach(Transform thing in playerThings)
+        {
+            thing.GetComponent<SpriteRenderer>().flipX = flipX;
+        }
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
