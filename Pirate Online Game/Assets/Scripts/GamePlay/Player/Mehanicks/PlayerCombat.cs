@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,8 @@ using UnityEngine;
 public class PlayerCombat : BaseCombatSystem
 {
     private Animator anim;
+
+    [SerializeField] float KnockTime;
 
     public override void Start()
     {
@@ -14,8 +17,9 @@ public class PlayerCombat : BaseCombatSystem
 
     private void Update()
     {
-        //Debug.Log(canHit);
-
+        //GetComponent<Rigidbody2D>().isKinematic = false;
+        //GetComponent<Rigidbody2D>().AddForce(new Vector2(2, 0), ForceMode2D.Force);
+        //GetComponent<Rigidbody2D>().isKinematic = true;
         if (!canHit)
         {
             GUI.instance.SetSwordSlotActive(false);
@@ -32,6 +36,8 @@ public class PlayerCombat : BaseCombatSystem
 
         currentComboState = hitNumber;
 
+        Debug.Log(currentComboState);
+
         anim.SetInteger("hitState", currentComboState + 1);
         anim.SetTrigger("Hit");
 
@@ -41,34 +47,40 @@ public class PlayerCombat : BaseCombatSystem
 
     public void Hit()
     {
-        Debug.Log("Hit" + pv.Owner.NickName);
-
         Collider2D[] hittingTargets = Physics2D.OverlapCircleAll(hitPos.position, hitRadius);
         foreach (Collider2D target in hittingTargets)
         {
-            if (target.gameObject.layer == 8)
+            if (target.gameObject.layer == 8 && PhotonNetwork.IsMasterClient)
             {
                 target.GetComponent<IDamageable>().Damage(combatHits[currentComboState].Damage);
 
                 if (combatHits[currentComboState].knockBackRage != 0)
                 {
-                    Vector3 direction = target.transform.position - transform.position;
+                    Vector2 direction = target.transform.position - transform.position;
 
-                    target.attachedRigidbody.AddForce(direction.normalized * combatHits[currentComboState].knockBackRage);
+                    target.attachedRigidbody.AddForce(direction.normalized * combatHits[currentComboState].knockBackRage, ForceMode2D.Impulse);
+
+                    StartCoroutine(knockingStop(target.attachedRigidbody, combatHits[currentComboState].knockBackTime));
                 }
             }
         }
     }
 
-
     public void StopHit()
     {
-        Debug.Log("Stop Hit" + pv.Owner.NickName);
-
+        currentComboState++;
         if (pv.IsMine)
         {
             StartCoroutine(ComboStateCoolDown());
             StartCoroutine(HitCoolDown());
         }
+    }
+
+    IEnumerator knockingStop(Rigidbody2D stoppingTargetsRigidbody, float knockTime)
+    {
+        yield return new WaitForSeconds(knockTime);
+
+        stoppingTargetsRigidbody.velocity = Vector2.zero;
+
     }
 }

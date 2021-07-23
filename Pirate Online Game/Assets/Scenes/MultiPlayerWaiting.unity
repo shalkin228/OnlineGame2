@@ -954,7 +954,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
-  maxHealth: 4
+  maxHealth: 10
   maxTargetingPosition: 50
   hitPos: {fileID: 595108339}
   hitRadius: 2.61
@@ -1598,7 +1598,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
-  maxHealth: 4
+  maxHealth: 10
   maxTargetingPosition: 50
   hitPos: {fileID: 913638880}
   hitRadius: 2.61
@@ -2351,7 +2351,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.088889, y: 1}
+    m_SensorSize: {x: 2.2520325, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

@@ -24,8 +24,8 @@ public class BaseCombatSystem : MonoBehaviour
 
     public virtual void ComboHit()
     {
-        if (!canHit)
-            return;
+        if (currentComboState > 2)
+            currentComboState = 0;
 
         pv.RPC("NetworkStartHit", RpcTarget.All, currentComboState);
     }
@@ -57,11 +57,7 @@ public class BaseCombatSystem : MonoBehaviour
     {
         canHit = false;
 
-        Debug.Log(1);
-
         yield return new WaitForSeconds(delayContinueHit);
-
-        print(2);
 
         canHit = true;
     }

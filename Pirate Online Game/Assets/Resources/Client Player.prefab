@@ -442,17 +442,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   combatHits:
-  - Damage: 2
-    knockBackRage: 10
   - Damage: 1
-    knockBackRage: 1
+    knockBackRage: 20
+    knockBackTime: 0.3
   - Damage: 1
-    knockBackRage: 1
+    knockBackRage: 20
+    knockBackTime: 0.3
+  - Damage: 1
+    knockBackRage: 20
+    knockBackTime: 0.3
   hitPos: {fileID: 8851795947292151013}
   isPlayer: 1
   hitRadius: 2.71
-  delayContinueCombo: 2
-  delayContinueHit: 1
+  delayContinueCombo: 1
+  delayContinueHit: 0.1
+  KnockTime: 0
 --- !u!114 &2690443484673800867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -499,7 +503,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 0.1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
